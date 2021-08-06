@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/my_nav"
+    app:startDestination="@id/orderListFragment">
+
+    <fragment
+        android:id="@+id/orderListFragment"
+        android:name="com.faint.cucinacafeadminapp.fragments.OrderListFragment"
+        android:label="fragment_order_list"
+        tools:layout="@layout/fragment_order_list" />
+    <fragment
+        android:id="@+id/cafePrefFragment"
+        android:name="com.faint.cucinacafeadminapp.fragments.CafePrefFragment"
+        android:label="fragment_cafe_pref"
+        tools:layout="@layout/fragment_cafe_pref" />
+</navigation>
