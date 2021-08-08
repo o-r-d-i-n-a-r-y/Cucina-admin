@@ -5,7 +5,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity"
-    android:background="?attr/colorOnPrimary">
+    android:background="?attr/colorOnSecondary">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorOnPrimary"
+        app:title="Cucina Cafe Admin App"
+        app:titleMargin="5dp"
+        app:titleTextColor="?attr/colorControlNormal"
+        android:id="@+id/toolBar"
+        app:popupTheme="@style/Theme.AppCompat.Light"/>
 
     <fragment
         android:layout_width="match_parent"
@@ -14,6 +24,7 @@
         android:id="@+id/fragment_container"
         android:layout_above="@+id/nav_view"
         app:defaultNavHost="true"
+        android:layout_below="@id/toolBar"
         app:navGraph="@navigation/my_nav"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

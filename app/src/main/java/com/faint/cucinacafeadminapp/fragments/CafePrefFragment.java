@@ -2,20 +2,36 @@ package com.faint.cucinacafeadminapp.fragments;
 
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
-
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
+import androidx.appcompat.app.AlertDialog;
+import androidx.preference.Preference;
+import androidx.preference.PreferenceFragmentCompat;
 
 import com.faint.cucinacafeadminapp.R;
+import com.faint.cucinacafeadminapp.preferences.SharedPrefManager;
 
-public class CafePrefFragment extends Fragment {
+
+public class CafePrefFragment extends PreferenceFragmentCompat {
+
+    Preference logoutPref;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+        addPreferencesFromResource(R.xml.main_settings);
 
-        return inflater.inflate(R.layout.fragment_cafe_pref, container, false);
+        logoutPref = getPreferenceManager().findPreference("logout");
+        logoutPref.setOnPreferenceClickListener(preference -> {
+            final AlertDialog.Builder builder = new AlertDialog.Builder( requireActivity() );
+
+            builder.setMessage( "Вы действительно хотите выйти из учётной записи кафе?" )
+                    .setCancelable(true)
+                    .setNegativeButton("Нет", null)
+                    .setPositiveButton("Да",
+                            (dialog, id) -> SharedPrefManager.getInstance(requireContext()).logout());
+
+            final AlertDialog alert = builder.create();
+            alert.show();
+
+            return true;
+        });
     }
 }

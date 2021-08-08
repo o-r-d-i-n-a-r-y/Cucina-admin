@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <PreferenceCategory
+        android:title="Настройки кафе">
+
+        <ListPreference
+            android:dialogTitle="Выберите новое состояние"
+            android:key="change_state"
+            android:entries="@array/states_array"
+            android:defaultValue="0"
+            android:entryValues="@array/entry_values"
+            android:title="Изменить состояние"
+            android:summary="Текущее состояние: не задано"/>
+
+        <Preference
+            android:key="change_urls"
+            android:summary="Сейчас ссылок: не задано"
+            android:title="Изменить ссылки на изображения"/>
+
+    </PreferenceCategory>
+
+    <PreferenceCategory
+        android:title="Прочее">
+
+        <Preference
+            android:key="logout"
+            android:title="Выйти из учётной записи"/>
+
+    </PreferenceCategory>
+
+</PreferenceScreen>
