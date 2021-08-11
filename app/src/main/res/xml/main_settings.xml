@@ -11,12 +11,10 @@
             android:entries="@array/states_array"
             android:defaultValue="0"
             android:entryValues="@array/entry_values"
-            android:title="Изменить состояние"
-            android:summary="Текущее состояние: не задано"/>
+            android:title="Изменить состояние"/>
 
         <Preference
             android:key="change_urls"
-            android:summary="Сейчас ссылок: не задано"
             android:title="Изменить ссылки на изображения"/>
 
     </PreferenceCategory>
