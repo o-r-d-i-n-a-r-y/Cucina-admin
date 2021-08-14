@@ -74,34 +74,62 @@
                 android:id="@+id/dishes_tv"
                 android:text="Hello world"/>
 
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:gravity="center"
-                android:weightSum="2">
+                android:layout_height="wrap_content">
 
-                <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="5dp"
-                    android:text="Accept"
-                    android:id="@+id/accept"
-                    android:backgroundTint="#43A047"
-                    android:layout_marginStart="5dp"/>
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:id="@+id/buttons"
+                    android:weightSum="2">
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="5dp"
+                        android:text="Accept"
+                        android:id="@+id/accept"
+                        android:backgroundTint="#43A047"
+                        android:layout_marginStart="5dp"/>
+
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="5dp"
+                        android:text="Decline"
+                        android:id="@+id/decline"
+                        android:backgroundTint="#E53935"
+                        android:layout_marginEnd="5dp"/>
+
+                </LinearLayout>
 
                 <Button
-                    android:layout_width="0dp"
-                    android:layout_weight="1"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="5dp"
-                    android:text="Decline"
-                    android:id="@+id/decline"
-                    android:backgroundTint="#E53935"
+                    android:text="Ready"
+                    android:visibility="gone"
+                    android:id="@+id/ready"
+                    android:backgroundTint="#1E88E5"
                     android:layout_marginEnd="5dp"/>
 
-            </LinearLayout>
+                <Button
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    android:text="Hand Over"
+                    android:visibility="gone"
+                    android:id="@+id/handed_over"
+                    android:backgroundTint="#FB8C00"
+                    android:layout_marginEnd="5dp"/>
+
+            </FrameLayout>
 
         </LinearLayout>
 

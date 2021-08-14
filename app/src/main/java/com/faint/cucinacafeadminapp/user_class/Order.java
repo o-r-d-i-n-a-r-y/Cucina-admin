@@ -3,6 +3,7 @@ package com.faint.cucinacafeadminapp.user_class;
 import java.util.ArrayList;
 
 public class Order {
+
     private final int id;
     private final String name;
     private final String phone;
