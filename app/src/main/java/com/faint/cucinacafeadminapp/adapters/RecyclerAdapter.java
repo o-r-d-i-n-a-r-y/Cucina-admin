@@ -1,6 +1,8 @@
 package com.faint.cucinacafeadminapp.adapters;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +28,6 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
 
     private final ArrayList<Order> orders;
 
-    private final int WAITING_STATE = 0;
     private final int ACTIVE_STATE = 1;
     private final int READY_STATE = 2;
     private final int DECLINED_STATE = 3;
@@ -79,6 +80,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
     @Override
     public void onBindViewHolder(@NonNull RecyclerAdapter.MyViewHolder holder, int position) {
 
+        final int WAITING_STATE = 0;
         switch (orders.get(position).getState()) {
             case WAITING_STATE:
                 holder.btnGroup.setVisibility(View.VISIBLE);
@@ -108,40 +110,74 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
         for(int i = 0; i < size; i++) {
             OrderDish dish = orders.get(position).getOrderDishes().get(i);
 
+            dishesStr.append(dish.getName()).append(" - ").append(dish.getAmount());
+
             if(i != size - 1)
-                dishesStr.append(dish.getName()).append(" - ").append(dish.getAmount()).append("\n");
-            else
-                dishesStr.append(dish.getName()).append(" - ").append(dish.getAmount());
+                dishesStr.append("\n");
         }
 
         holder.dishesTV.setText(dishesStr);
 
-        holder.btnAccept.setOnClickListener(view -> {
-            changeOrderState(ACTIVE_STATE, orders.get(position).getId());
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(context);
 
-            orders.get(position).setState(ACTIVE_STATE);
-            notifyDataSetChanged();
+        holder.btnAccept.setOnClickListener(view -> {
+            alertDialog.setMessage("Вы уверены что хотите принять этот заказ?")
+                    .setCancelable(true)
+                    .setPositiveButton("Да", (dialogInterface, i) -> {
+                        changeOrderState(ACTIVE_STATE, orders.get(position).getId());
+
+                        orders.get(position).setState(ACTIVE_STATE);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Нет", null);
+
+            final AlertDialog alert = alertDialog.create();
+            alert.show();
         });
 
         holder.btnDecline.setOnClickListener(view -> {
-            changeOrderState(DECLINED_STATE, orders.get(position).getId());
+            alertDialog.setMessage("Вы уверены что хотите отклонить этот заказ?")
+                    .setCancelable(true)
+                    .setPositiveButton("Да", (dialogInterface, i) -> {
+                        changeOrderState(DECLINED_STATE, orders.get(position).getId());
 
-            orders.remove(position);
-            notifyDataSetChanged();
+                        orders.remove(position);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Нет", null);
+
+            final AlertDialog alert = alertDialog.create();
+            alert.show();
         });
 
         holder.btnReady.setOnClickListener(view -> {
-            changeOrderState(READY_STATE, orders.get(position).getId());
+            alertDialog.setMessage("Подтвердите готовность заказа")
+                    .setCancelable(true)
+                    .setPositiveButton("Да", (dialogInterface, i) -> {
+                        changeOrderState(READY_STATE, orders.get(position).getId());
 
-            orders.get(position).setState(READY_STATE);
-            notifyDataSetChanged();
+                        orders.get(position).setState(READY_STATE);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Нет", null);
+
+            final AlertDialog alert = alertDialog.create();
+            alert.show();
         });
 
         holder.btnHandOver.setOnClickListener(view -> {
-            changeOrderState(HANDED_OVER_STATE, orders.get(position).getId());
+            alertDialog.setMessage("Подтвердите выдачу заказа")
+                    .setCancelable(true)
+                    .setPositiveButton("Да", (dialogInterface, i) -> {
+                        changeOrderState(HANDED_OVER_STATE, orders.get(position).getId());
 
-            orders.remove(position);
-            notifyDataSetChanged();
+                        orders.remove(position);
+                        notifyDataSetChanged();
+                    })
+                    .setNegativeButton("Нет", null);
+
+            final AlertDialog alert = alertDialog.create();
+            alert.show();
         });
     }
 
@@ -166,7 +202,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.MyView
                         e.printStackTrace();
                     }
 
-
+                    // TODO: change UI there
                 },
                 error -> Toast.makeText(context,
                         "Ошибка подключения!\nПроверьте интернет-соединение", Toast.LENGTH_SHORT).show()
